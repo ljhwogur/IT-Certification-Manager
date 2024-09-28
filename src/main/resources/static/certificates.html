@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자격증 목록</title>
+</head>
+<body>
+<h1>자격증 목록</h1>
+<ul id="certificate-list">
+    <!-- 자격증 목록이 여기에 추가될 예정 -->
+</ul>
+
+<script>
+    fetch('/api/certificates')
+        .then(response => response.json())
+        .then(data => {
+            const certificateList = document.getElementById('certificate-list');
+            data.forEach(certificate => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `/certificateDetail.html?name=${certificate.name}`;
+                link.textContent = certificate.name;
+                listItem.appendChild(link);
+                certificateList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching certificate list:', error));
+</script>
+</body>
+</html>

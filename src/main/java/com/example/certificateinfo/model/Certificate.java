@@ -1,16 +1,25 @@
 package com.example.certificateinfo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Certificate {
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("description")
     private String description;
 
-    // 생성자
+    // 기본 생성자
+    public Certificate() {}
+
+    // 매개변수 생성자
     public Certificate(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    // 게터와 세터
+    // Getter 및 Setter
     public String getName() {
         return name;
     }

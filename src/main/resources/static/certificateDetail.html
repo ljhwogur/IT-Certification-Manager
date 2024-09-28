@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자격증 상세 정보</title>
+</head>
+<body>
+<h1 id="certificate-name">자격증 이름</h1>
+<div id="certificate-info">
+    <!-- 자격증 상세 정보가 여기에 추가될 예정 -->
+</div>
+<a href="/certificates.html">목록으로 돌아가기</a>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const certificateName = urlParams.get('name');
+
+    fetch(`/api/certificates/${certificateName}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('certificate-name').textContent = certificateName;
+            const certificateInfoDiv = document.getElementById('certificate-info');
+            if (data.error) {
+                certificateInfoDiv.textContent = data.error;
+            } else {
+                certificateInfoDiv.textContent = JSON.stringify(data.items, null, 2);
+            }
+        })
+        .catch(error => console.error('Error fetching certificate details:', error));
+</script>
+</body>
+</html>
